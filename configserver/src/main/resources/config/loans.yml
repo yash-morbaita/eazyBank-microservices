@@ -1,0 +1,12 @@
+
+build:
+  version: 3.0
+
+loans:
+  message: "Welcome to EazyBank account related local APIs"
+  contactDetails:
+    name: "Yash Morbita - Developer"
+    email: "ymorbita@gmail.com"
+  onCallSupport:
+    -(671-961-9466)
+    -(671-961-9467)

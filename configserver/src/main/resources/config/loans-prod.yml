@@ -1,0 +1,12 @@
+
+build:
+  version: 1.0
+
+loans:
+  message: "Welcome to EazyBank account related local APIs"
+  contactDetails:
+    name: "Suresh Saud - Prod QA"
+    email: "ssaud@gmail.com"
+  onCallSupport:
+    -(671-961-9444)
+    -(671-961-9455)

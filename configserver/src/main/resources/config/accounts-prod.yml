@@ -1,0 +1,12 @@
+
+build:
+  version: 1.0
+
+accounts:
+  message: " Welcome to EazyBank Account Contact info"
+  contactDetails:
+    name: "Yash Morbita Prod"
+    email: "yashmorbita@gmail.com"
+  onCallSupport:
+    - (617) 961 9466
+    - (617) 961 9466
