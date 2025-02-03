@@ -1,4 +1,4 @@
-package com.codewithyash.accounts.Constants;
+package com.codewithyash.accounts.constants;
 
 public class AccountsConstants {
 

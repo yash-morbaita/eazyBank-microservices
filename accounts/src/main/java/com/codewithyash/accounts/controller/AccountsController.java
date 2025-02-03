@@ -1,6 +1,6 @@
 package com.codewithyash.accounts.controller;
 
-import com.codewithyash.accounts.Constants.AccountsConstants;
+import com.codewithyash.accounts.constants.AccountsConstants;
 import com.codewithyash.accounts.dto.AccountsContactInfoPropertyDto;
 import com.codewithyash.accounts.dto.CustomerDto;
 import com.codewithyash.accounts.dto.ErrorResponseDto;
@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

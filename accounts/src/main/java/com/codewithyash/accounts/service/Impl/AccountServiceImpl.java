@@ -1,6 +1,6 @@
 package com.codewithyash.accounts.service.Impl;
 
-import com.codewithyash.accounts.Constants.AccountsConstants;
+import com.codewithyash.accounts.constants.AccountsConstants;
 import com.codewithyash.accounts.dto.AccountsDto;
 import com.codewithyash.accounts.dto.CustomerDto;
 import com.codewithyash.accounts.entity.Accounts;

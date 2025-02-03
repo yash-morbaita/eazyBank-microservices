@@ -4,18 +4,31 @@ server:
 spring:
   application:
     name: "loans"
+
+    #  For H2 Database
+    #  datasource:
+    #    url: jdbc:h2:mem:testdb
+    #    driverClassName: org.h2.Driver
+    #    username: sa
+    #    password: ''
+    #  h2:
+    #    console:
+    #      enabled: true
+    #  jpa:
+    #    database-platform: org.hibernate.dialect.H2Dialect
+    #    hibernate:
+    #      ddl-auto: update
+    #    show-sql: true
+
+    #For MySql database
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-  h2:
-    console:
-      enabled: true
+    url: jdbc:mysql://localhost:3307/loansdb
+    username: root
+    password: root
+  sql:
+    init:
+      mode: always
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: update
     show-sql: true
 
   #activate default profile
@@ -24,14 +37,36 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8071"
 
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+#Eureka Properties
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+info:
+  app:
+    name: "accounts"
+    description: "Eazy Bank Account Application"
+    version: "1.0.0"
