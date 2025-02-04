@@ -109,15 +109,15 @@
 
     <build>
         <plugins>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <image>
-                        <name>yashmorbita/${project.artifactId}:b1</name>
-                    </image>
-                </configuration>
-            </plugin>-->
+<!--                <configuration>-->
+<!--                    <image>-->
+<!--                        <name>yashmorbita/${project.artifactId}:b1</name>-->
+<!--                    </image>-->
+<!--                </configuration>-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -137,7 +137,7 @@
                 <version>3.4.2</version>
                 <configuration>
                     <to>
-                        <image>yashmorbita/${project.artifactId}:s4</image>
+                        <image>yashmorbita/${project.artifactId}:s5</image>
                     </to>
                 </configuration>
             </plugin>

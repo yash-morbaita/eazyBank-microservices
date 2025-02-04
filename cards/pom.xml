@@ -108,10 +108,10 @@
 
 	<build>
 		<plugins>
-			<!--<plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>-->
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -131,7 +131,7 @@
 				<version>3.4.2</version>
 				<configuration>
 					<to>
-						<image>yashmorbita/${project.artifactId}:s4</image>
+						<image>yashmorbita/${project.artifactId}:s5</image>
 					</to>
 				</configuration>
 			</plugin>
