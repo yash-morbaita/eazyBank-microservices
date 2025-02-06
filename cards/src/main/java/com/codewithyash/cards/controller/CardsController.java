@@ -6,6 +6,7 @@ import com.codewithyash.cards.dto.CardsDto;
 import com.codewithyash.cards.dto.ErrorResponseDto;
 import com.codewithyash.cards.dto.ResponseDto;
 import com.codewithyash.cards.service.ICardsService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +45,9 @@ public class CardsController {
         this.iCardsService = iCardsService;
     }
 
-//    @Value("${build.version}")
-//    private String buildVersion;
+    @Value("${build.version}")
+    private String buildVersion;
+
 
     @Autowired
     private CardsMSContactInfoDto cardsMSContactInfoDto;
@@ -166,30 +169,30 @@ public class CardsController {
         }
     }
 
-//    @Operation(
-//            summary = "Build Information for MS",
-//            description = " REST API with information about the build info"
-//    )
-//    @ApiResponses({
-//            @ApiResponse(
-//                    responseCode = "200",
-//                    description = "HTTP Status OK"
-//            ),
-//            @ApiResponse(
-//                    responseCode = "500",
-//                    description = "HTTP Status Client Error",
-//                    content = @Content(
-//                            schema = @Schema(implementation = ErrorResponseDto.class)
-//                    )
-//            )
-//    })
-//
-//    @GetMapping("/build-info")
-//    public ResponseEntity<String> getBuildInfo() {
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body("Version: " + buildVersion);
-//    }
+    @Operation(
+            summary = "Build Information for MS",
+            description = " REST API with information about the build info"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Client Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Version: " + buildVersion);
+    }
 
     @Operation(
             summary = "Contact Information for Cards MS",

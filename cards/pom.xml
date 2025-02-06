@@ -92,6 +92,10 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+		</dependency>
 
 	</dependencies>
 	<dependencyManagement>
@@ -131,7 +135,7 @@
 				<version>3.4.2</version>
 				<configuration>
 					<to>
-						<image>yashmorbita/${project.artifactId}:s5</image>
+						<image>yashmorbita/${project.artifactId}:s6</image>
 					</to>
 				</configuration>
 			</plugin>

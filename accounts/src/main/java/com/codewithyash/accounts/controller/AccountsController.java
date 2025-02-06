@@ -6,6 +6,8 @@ import com.codewithyash.accounts.dto.CustomerDto;
 import com.codewithyash.accounts.dto.ErrorResponseDto;
 import com.codewithyash.accounts.dto.ResponseDto;
 import com.codewithyash.accounts.service.IAccountService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,7 +16,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,6 +37,8 @@ import org.springframework.web.bind.annotation.*;
 )
 public class AccountsController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AccountsController.class);
+
     private final IAccountService accountService;
 
 
@@ -44,8 +51,8 @@ public class AccountsController {
 
     /** decalring variable using @Value. this gets the value from tghe properties.(in backend, properties is loaded in applciation
      * context, from that application context, value is passed using @Value. **/
-//    @Value("${build.version}")
-//    private String buildVersion;
+    @Value("${build.version}")
+    private String buildVersion;
 
     /** loading properties using Environment Variables**/
     @Autowired
@@ -167,30 +174,37 @@ public class AccountsController {
         }
     }
 
-//    @Operation(
-//            summary = "Build Information for MS",
-//            description = " REST API with information about the build info"
-//    )
-//    @ApiResponses({
-//            @ApiResponse(
-//                    responseCode = "200",
-//                    description = "HTTP Status OK"
-//            ),
-//            @ApiResponse(
-//                    responseCode = "500",
-//                    description = "HTTP Status Client Error",
-//                    content = @Content(
-//                            schema = @Schema(implementation = ErrorResponseDto.class)
-//                    )
-//            )
-//    })
-//
-//    @GetMapping("/build-info")
-//    public ResponseEntity<String> getBuildInfo() {
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body("Version: " + buildVersion);
-//    }
+    @Operation(
+            summary = "Build Information for MS",
+            description = " REST API with information about the build info"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Client Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+
+    @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback")
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        logger.debug("getBuildInfo() method invoked");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Version: " + buildVersion);
+    }
+
+    public ResponseEntity<String> getBuildInfoFallback(Throwable throwable) {
+        logger.debug("getBuildInfoFallback() method invoked");
+        return ResponseEntity.status(HttpStatus.OK).body("Retry after some time- Request Failed");
+    }
 
     @Operation(
             summary = "Build Information to get Java version for MS",
@@ -209,11 +223,19 @@ public class AccountsController {
                     )
             )
     })
+
+    @RateLimiter(name = "getJavaVersion", fallbackMethod = "getJavaVersionFallback")
     @GetMapping("/java-version")
     public ResponseEntity<String> getJavaVersion() {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Java Version: " + environment.getProperty("JAVA_HOME"));
+    }
+
+    public ResponseEntity<String> getJavaVersionFallback() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("JAVA 17");
     }
 
     @Operation(
