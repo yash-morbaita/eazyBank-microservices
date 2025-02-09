@@ -1,26 +1,2 @@
 .idea/
-        loans/target/classes/application.yml
-        loans/target/jib-cache/jib-classpath-file
-        loans/target/jib-cache/layers/2773323728f05bee4d2cab87ad779b85b04c102c37290e8a363679e5cf14f68e/
-        loans/target/jib-cache/layers/2e25a263701c9b699f789a3bad5dff93cd74050f1eca9d0835c8fd926e4db68a/
-        loans/target/jib-cache/layers/40ca96613467dd875d4afabf94ae8290e699645aa91878cb1621e3f7a4569789/
-        loans/target/jib-cache/layers/52b4d1914c7be3baa69f737ad3eddb569dde09875b3105f2e6c69d7ed28866c9/
-        loans/target/jib-cache/layers/5eed307152c69743a7316859528f2f950e0c0029e301d7f2f979d0608094c85c/
-        loans/target/jib-cache/layers/7306ea87668237e155693cdd577637d3da6c8b9bd5196834bba3787c3e76d482/
-        loans/target/jib-cache/selectors/19b64d2c30cc12776468a90809cf44d3b203d304b52231ff828b2ea71f45ff19
-        loans/target/jib-cache/selectors/2a6d284a071821149d56d07d7be4438106dc2be820a8243eb65992886fc8d0cb
-        loans/target/jib-cache/selectors/3a780c2ff408e8da46de544d022aa4397eda3384326aa5581cacc8e16c13193d
-        loans/target/jib-cache/selectors/45d3fa0ee73bbb75898336610010a4d5ec95972f983f101c1588f8dc5438e207
-        loans/target/jib-cache/selectors/ab185d89aeaef9322aab21d5c42f9b94ee65d195236248e07d05034758680506
-        loans/target/jib-cache/selectors/b0e2ed3757d6a6c53fd7ce8ecf6ac1a1e82fc4eb910679b71d8c040b459e8861
-        loans/target/jib-cache/selectors/ef8a044aee709daf80c7310e77db78b260b0bf8f4c96684829a5560c6382f03d
-        loans/target/jib-image.digest
-        loans/target/jib-image.id
-        loans/target/jib-image.json
-        loans/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
-loans/target/classes/application.yml
-loans/target/jib-cache/jib-classpath-file
-loans/target/jib-image.digest
-loans/target/jib-image.id
-loans/target/jib-image.json
-loans/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+loans/target/
