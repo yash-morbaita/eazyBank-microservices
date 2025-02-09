@@ -59,7 +59,7 @@ services:
       service: microservice-db-config
 
   configserver:
-    image: "yashmorbita/configserver:s6"
+    image: "yashmorbita/configserver:s8"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -75,7 +75,7 @@ services:
 
 
   eurekaserver:
-    image: "yashmorbita/eurekaserver:s6"
+    image: "yashmorbita/eurekaserver:s8"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -95,7 +95,7 @@ services:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
   accounts:
-    image: "yashmorbita/accounts:s6"
+    image: "yashmorbita/accounts:s8"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -122,7 +122,7 @@ services:
       service: microservice-eureka-config
 
   loans:
-    image: "yashmorbita/loans:s6"
+    image: "yashmorbita/loans:s8"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -149,7 +149,7 @@ services:
       service: microservice-eureka-config
 
   loans1:
-    image: "yashmorbita/loans:s6"
+    image: "yashmorbita/loans:s8"
     container_name: loans-ms1
     ports:
       - "8091:8090"
@@ -176,7 +176,7 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "yashmorbita/cards:s6"
+    image: "yashmorbita/cards:s8"
     container_name: cards-ms
     ports:
       - "9000:9000"
@@ -203,7 +203,7 @@ services:
       service: microservice-eureka-config
 
   gatewayserer:
-    image: "yashmorbita/gatewayserver:s6"
+    image: "yashmorbita/gatewayserver:s8"
     container_name: gatewayserver-ms
     ports:
       - "8072:9000"

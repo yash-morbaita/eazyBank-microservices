@@ -150,7 +150,7 @@
 				<version>3.4.2</version>
 				<configuration>
 					<to>
-						<image>yashmorbita/${project.artifactId}:s7</image>
+						<image>yashmorbita/${project.artifactId}:s8</image>
 					</to>
 				</configuration>
 			</plugin>
