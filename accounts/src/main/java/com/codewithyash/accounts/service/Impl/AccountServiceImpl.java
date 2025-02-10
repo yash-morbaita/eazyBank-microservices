@@ -1,6 +1,7 @@
 package com.codewithyash.accounts.service.Impl;
 
 import com.codewithyash.accounts.constants.AccountsConstants;
+import com.codewithyash.accounts.dto.AccountMessageDto;
 import com.codewithyash.accounts.dto.AccountsDto;
 import com.codewithyash.accounts.dto.CustomerDto;
 import com.codewithyash.accounts.entity.Accounts;
@@ -13,6 +14,9 @@ import com.codewithyash.accounts.repository.AccountRepository;
 import com.codewithyash.accounts.repository.CustomerRepository;
 import com.codewithyash.accounts.service.IAccountService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,9 +27,13 @@ import java.util.Random;
 @AllArgsConstructor
 public class AccountServiceImpl implements IAccountService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
+
     private AccountRepository accountRepository;
 
     private CustomerRepository customerRepository;
+
+    private final StreamBridge streamBridge;
 
 //    public AccountServiceImpl(
 //            @Qualifier("accountRepository") AccountRepository accountRepository,
@@ -44,10 +52,18 @@ public class AccountServiceImpl implements IAccountService {
 
         Customer savedCustomer = customerRepository.save(newCustomer);
 
-        accountRepository.save(createNewAccount(savedCustomer));
+        Accounts savedAccounts = accountRepository.save(createNewAccount(savedCustomer));
+        sendCommunication(savedAccounts,savedCustomer);
 
     }
 
+    private void sendCommunication(Accounts account, Customer customer) {
+        var accountsMsgDto = new AccountMessageDto(account.getAccountNumber(), customer.getName(),
+                customer.getEmail(), customer.getMobileNumber());
+        logger.info("Sending Communication request for the details: {}", accountsMsgDto);
+        var result = streamBridge.send("sendCommunication-out-0", accountsMsgDto);
+        logger.info("Is the Communication request successfully triggered ? : {}", result);
+    }
     /**
      * This method return the Customer Account based on mobile Number
      *
@@ -106,6 +122,20 @@ public class AccountServiceImpl implements IAccountService {
         customerRepository.deleteById(customer.getCustomerId());
         accountRepository.deleteByCustomerId(customer.getCustomerId());
         return true;
+    }
+
+    @Override
+    public boolean updateCommunicationStatus(Long accountNumber) {
+        boolean isUpdated = false;
+        if(accountNumber!= null) {
+            Accounts accounts = accountRepository.findById(accountNumber).orElseThrow(
+                    () -> new ResourceNotFoundException(" Account", "AccountNumber", accountNumber.toString())
+            );
+            accounts.setCommunicationSw(true);
+            accountRepository.save(accounts);
+            isUpdated = true;
+        }
+        return isUpdated;
     }
 
     private Accounts createNewAccount(Customer customer) {
