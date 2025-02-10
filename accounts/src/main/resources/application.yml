@@ -51,6 +51,23 @@ spring:
     openfeign:
       circuitbreaker:
         enabled: true
+    function:
+      defination: updateCommunication
+    #Event Streaming properties
+    stream:
+      bindings:
+        updateCommunication-in-0:
+          destination: communication-sent
+          group: ${spring.application.name}
+        sendCommunication-out-0:
+          destination: send-communication #destination is exchange for output binding
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    connection-timeout: 10s
 
 management:
   endpoints:
